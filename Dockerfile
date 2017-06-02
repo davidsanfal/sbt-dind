@@ -1,27 +1,23 @@
 FROM ubuntu:16.04
 
-RUN apt-get update -qq && apt-get install -qqy \
+RUN apt-get update -qq && \
+    apt-get upgrade -y && \
+    apt-get install -qqy \
     apt-transport-https \
     ca-certificates \
     curl \
     lxc \
-    iptables
-
-RUN curl -sSL https://get.docker.com/ | sh && \
-    apt-get update && \
-    apt-get upgrade -y && \
+    iptables && \
+    curl -sSL https://get.docker.com/ | sh && \
     apt-get install -y --fix-missing docker-engine \
     software-properties-common \
     apt-transport-https \
     python3 \
     python3-pip \
-    libyaml-dev
-
-RUN add-apt-repository ppa:openjdk-r/ppa && \
-    apt-get update -y && \
-    apt-get install -y openjdk-8-jdk
-
-RUN apt-get clean && \
+    libyaml-dev && \
+    add-apt-repository ppa:openjdk-r/ppa && \
+    apt-get install -y openjdk-8-jdk && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -L -o sbt.deb http://dl.bintray.com/sbt/debian/sbt-0.13.13.deb && \
