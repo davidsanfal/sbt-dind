@@ -18,3 +18,7 @@ RUN curl -L https://github.com/docker/compose/releases/download/1.13.0/docker-co
 RUN chmod +x /usr/local/bin/docker-compose
 RUN sbt about
 RUN docker-compose version
+
+ENV LOG=file
+ENTRYPOINT ["wrapdocker"]
+CMD []
